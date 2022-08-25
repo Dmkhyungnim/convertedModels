@@ -1,0 +1,905 @@
+{
+    "chunkNum": 4, 
+    "dataLayout": "nchw", 
+    "feedShape": {
+        "fc": 100, 
+        "fh": 4, 
+        "fw": 4
+    }, 
+    "ops": [
+        {
+            "attrs": {
+                "with_quant_attr": false
+            }, 
+            "inputs": {
+                "X": [
+                    "feed"
+                ]
+            }, 
+            "outputs": {
+                "Out": [
+                    "image"
+                ]
+            }, 
+            "type": "feed"
+        }, 
+        {
+            "attrs": {
+                "dilations": [
+                    1, 
+                    1
+                ], 
+                "force_fp32_output": false, 
+                "fuse_activation": "", 
+                "fuse_alpha": 0.0, 
+                "fuse_beta": 0.0, 
+                "fuse_relu": false, 
+                "groups": 1, 
+                "output_padding": [], 
+                "output_size": [], 
+                "padding_algorithm": "EXPLICIT", 
+                "paddings": [
+                    0, 
+                    0
+                ], 
+                "strides": [
+                    1, 
+                    1
+                ], 
+                "with_quant_attr": false
+            }, 
+            "inputs": {
+                "Filter": [
+                    "conv2d_transpose_0.w_0"
+                ], 
+                "Input": [
+                    "image"
+                ]
+            }, 
+            "outputs": {
+                "Out": [
+                    "conv2d_transpose_5.tmp_0"
+                ]
+            }, 
+            "type": "conv2d_transpose"
+        }, 
+        {
+            "attrs": {
+                "data_layout": "NCHW", 
+                "epsilon": 9.999999747378752e-06, 
+                "fuse_with_relu": false, 
+                "momentum": 0.8999999761581421, 
+                "trainable_statistics": false, 
+                "use_global_stats": false, 
+                "with_quant_attr": false
+            }, 
+            "inputs": {
+                "Bias": [
+                    "batch_norm2d_0.b_0"
+                ], 
+                "Mean": [
+                    "batch_norm2d_0.w_1"
+                ], 
+                "Scale": [
+                    "batch_norm2d_0.w_0"
+                ], 
+                "Variance": [
+                    "batch_norm2d_0.w_2"
+                ], 
+                "X": [
+                    "conv2d_transpose_5.tmp_0"
+                ]
+            }, 
+            "outputs": {
+                "MeanOut": [
+                    "batch_norm2d_0.w_1"
+                ], 
+                "Out": [
+                    "batch_norm_0.tmp_2"
+                ], 
+                "SavedMean": [
+                    "batch_norm_0.tmp_0"
+                ], 
+                "SavedVariance": [
+                    "batch_norm_0.tmp_1"
+                ], 
+                "VarianceOut": [
+                    "batch_norm2d_0.w_2"
+                ]
+            }, 
+            "type": "batchnorm"
+        }, 
+        {
+            "attrs": {
+                "with_quant_attr": false
+            }, 
+            "inputs": {
+                "X": [
+                    "batch_norm_0.tmp_2"
+                ]
+            }, 
+            "outputs": {
+                "Out": [
+                    "relu_0.tmp_0"
+                ]
+            }, 
+            "type": "relu"
+        }, 
+        {
+            "attrs": {
+                "dilations": [
+                    1, 
+                    1
+                ], 
+                "force_fp32_output": false, 
+                "fuse_activation": "", 
+                "fuse_alpha": 0.0, 
+                "fuse_beta": 0.0, 
+                "fuse_relu": false, 
+                "groups": 1, 
+                "output_padding": [], 
+                "output_size": [], 
+                "padding_algorithm": "EXPLICIT", 
+                "paddings": [
+                    1, 
+                    1
+                ], 
+                "strides": [
+                    2, 
+                    2
+                ], 
+                "with_quant_attr": false
+            }, 
+            "inputs": {
+                "Filter": [
+                    "conv2d_transpose_1.w_0"
+                ], 
+                "Input": [
+                    "relu_0.tmp_0"
+                ]
+            }, 
+            "outputs": {
+                "Out": [
+                    "conv2d_transpose_6.tmp_0"
+                ]
+            }, 
+            "type": "conv2d_transpose"
+        }, 
+        {
+            "attrs": {
+                "data_layout": "NCHW", 
+                "epsilon": 9.999999747378752e-06, 
+                "fuse_with_relu": false, 
+                "momentum": 0.8999999761581421, 
+                "trainable_statistics": false, 
+                "use_global_stats": false, 
+                "with_quant_attr": false
+            }, 
+            "inputs": {
+                "Bias": [
+                    "batch_norm2d_1.b_0"
+                ], 
+                "Mean": [
+                    "batch_norm2d_1.w_1"
+                ], 
+                "Scale": [
+                    "batch_norm2d_1.w_0"
+                ], 
+                "Variance": [
+                    "batch_norm2d_1.w_2"
+                ], 
+                "X": [
+                    "conv2d_transpose_6.tmp_0"
+                ]
+            }, 
+            "outputs": {
+                "MeanOut": [
+                    "batch_norm2d_1.w_1"
+                ], 
+                "Out": [
+                    "batch_norm_1.tmp_2"
+                ], 
+                "SavedMean": [
+                    "batch_norm_1.tmp_0"
+                ], 
+                "SavedVariance": [
+                    "batch_norm_1.tmp_1"
+                ], 
+                "VarianceOut": [
+                    "batch_norm2d_1.w_2"
+                ]
+            }, 
+            "type": "batchnorm"
+        }, 
+        {
+            "attrs": {
+                "with_quant_attr": false
+            }, 
+            "inputs": {
+                "X": [
+                    "batch_norm_1.tmp_2"
+                ]
+            }, 
+            "outputs": {
+                "Out": [
+                    "relu_1.tmp_0"
+                ]
+            }, 
+            "type": "relu"
+        }, 
+        {
+            "attrs": {
+                "dilations": [
+                    1, 
+                    1
+                ], 
+                "force_fp32_output": false, 
+                "fuse_activation": "", 
+                "fuse_alpha": 0.0, 
+                "fuse_beta": 0.0, 
+                "fuse_relu": false, 
+                "groups": 1, 
+                "output_padding": [], 
+                "output_size": [], 
+                "padding_algorithm": "EXPLICIT", 
+                "paddings": [
+                    1, 
+                    1
+                ], 
+                "strides": [
+                    2, 
+                    2
+                ], 
+                "with_quant_attr": false
+            }, 
+            "inputs": {
+                "Filter": [
+                    "conv2d_transpose_2.w_0"
+                ], 
+                "Input": [
+                    "relu_1.tmp_0"
+                ]
+            }, 
+            "outputs": {
+                "Out": [
+                    "conv2d_transpose_7.tmp_0"
+                ]
+            }, 
+            "type": "conv2d_transpose"
+        }, 
+        {
+            "attrs": {
+                "data_layout": "NCHW", 
+                "epsilon": 9.999999747378752e-06, 
+                "fuse_with_relu": false, 
+                "momentum": 0.8999999761581421, 
+                "trainable_statistics": false, 
+                "use_global_stats": false, 
+                "with_quant_attr": false
+            }, 
+            "inputs": {
+                "Bias": [
+                    "batch_norm2d_2.b_0"
+                ], 
+                "Mean": [
+                    "batch_norm2d_2.w_1"
+                ], 
+                "Scale": [
+                    "batch_norm2d_2.w_0"
+                ], 
+                "Variance": [
+                    "batch_norm2d_2.w_2"
+                ], 
+                "X": [
+                    "conv2d_transpose_7.tmp_0"
+                ]
+            }, 
+            "outputs": {
+                "MeanOut": [
+                    "batch_norm2d_2.w_1"
+                ], 
+                "Out": [
+                    "batch_norm_2.tmp_2"
+                ], 
+                "SavedMean": [
+                    "batch_norm_2.tmp_0"
+                ], 
+                "SavedVariance": [
+                    "batch_norm_2.tmp_1"
+                ], 
+                "VarianceOut": [
+                    "batch_norm2d_2.w_2"
+                ]
+            }, 
+            "type": "batchnorm"
+        }, 
+        {
+            "attrs": {
+                "with_quant_attr": false
+            }, 
+            "inputs": {
+                "X": [
+                    "batch_norm_2.tmp_2"
+                ]
+            }, 
+            "outputs": {
+                "Out": [
+                    "relu_2.tmp_0"
+                ]
+            }, 
+            "type": "relu"
+        }, 
+        {
+            "attrs": {
+                "dilations": [
+                    1, 
+                    1
+                ], 
+                "force_fp32_output": false, 
+                "fuse_activation": "", 
+                "fuse_alpha": 0.0, 
+                "fuse_beta": 0.0, 
+                "fuse_relu": false, 
+                "groups": 1, 
+                "output_padding": [], 
+                "output_size": [], 
+                "padding_algorithm": "EXPLICIT", 
+                "paddings": [
+                    1, 
+                    1
+                ], 
+                "strides": [
+                    2, 
+                    2
+                ], 
+                "with_quant_attr": false
+            }, 
+            "inputs": {
+                "Filter": [
+                    "conv2d_transpose_3.w_0"
+                ], 
+                "Input": [
+                    "relu_2.tmp_0"
+                ]
+            }, 
+            "outputs": {
+                "Out": [
+                    "conv2d_transpose_8.tmp_0"
+                ]
+            }, 
+            "type": "conv2d_transpose"
+        }, 
+        {
+            "attrs": {
+                "data_layout": "NCHW", 
+                "epsilon": 9.999999747378752e-06, 
+                "fuse_with_relu": false, 
+                "momentum": 0.8999999761581421, 
+                "trainable_statistics": false, 
+                "use_global_stats": false, 
+                "with_quant_attr": false
+            }, 
+            "inputs": {
+                "Bias": [
+                    "batch_norm2d_3.b_0"
+                ], 
+                "Mean": [
+                    "batch_norm2d_3.w_1"
+                ], 
+                "Scale": [
+                    "batch_norm2d_3.w_0"
+                ], 
+                "Variance": [
+                    "batch_norm2d_3.w_2"
+                ], 
+                "X": [
+                    "conv2d_transpose_8.tmp_0"
+                ]
+            }, 
+            "outputs": {
+                "MeanOut": [
+                    "batch_norm2d_3.w_1"
+                ], 
+                "Out": [
+                    "batch_norm_3.tmp_2"
+                ], 
+                "SavedMean": [
+                    "batch_norm_3.tmp_0"
+                ], 
+                "SavedVariance": [
+                    "batch_norm_3.tmp_1"
+                ], 
+                "VarianceOut": [
+                    "batch_norm2d_3.w_2"
+                ]
+            }, 
+            "type": "batchnorm"
+        }, 
+        {
+            "attrs": {
+                "with_quant_attr": false
+            }, 
+            "inputs": {
+                "X": [
+                    "batch_norm_3.tmp_2"
+                ]
+            }, 
+            "outputs": {
+                "Out": [
+                    "relu_3.tmp_0"
+                ]
+            }, 
+            "type": "relu"
+        }, 
+        {
+            "attrs": {
+                "dilations": [
+                    1, 
+                    1
+                ], 
+                "force_fp32_output": false, 
+                "fuse_activation": "", 
+                "fuse_alpha": 0.0, 
+                "fuse_beta": 0.0, 
+                "fuse_relu": false, 
+                "groups": 1, 
+                "output_padding": [], 
+                "output_size": [], 
+                "padding_algorithm": "EXPLICIT", 
+                "paddings": [
+                    1, 
+                    1
+                ], 
+                "strides": [
+                    2, 
+                    2
+                ], 
+                "with_quant_attr": false
+            }, 
+            "inputs": {
+                "Filter": [
+                    "conv2d_transpose_4.w_0"
+                ], 
+                "Input": [
+                    "relu_3.tmp_0"
+                ]
+            }, 
+            "outputs": {
+                "Out": [
+                    "conv2d_transpose_9.tmp_0"
+                ]
+            }, 
+            "type": "conv2d_transpose"
+        }, 
+        {
+            "attrs": {
+                "with_quant_attr": false
+            }, 
+            "inputs": {
+                "X": [
+                    "conv2d_transpose_9.tmp_0"
+                ]
+            }, 
+            "outputs": {
+                "Out": [
+                    "tanh_1.tmp_0"
+                ]
+            }, 
+            "type": "tanh"
+        }, 
+        {
+            "attrs": {
+                "with_quant_attr": false
+            }, 
+            "inputs": {
+                "X": [
+                    "tanh_1.tmp_0"
+                ]
+            }, 
+            "outputs": {
+                "Out": [
+                    "fetch"
+                ]
+            }, 
+            "type": "fetch"
+        }
+    ], 
+    "vars": {
+        "batch_norm2d_0.b_0": {
+            "name": "batch_norm2d_0.b_0", 
+            "persistable": true, 
+            "shape": [
+                512
+            ]
+        }, 
+        "batch_norm2d_0.w_0": {
+            "name": "batch_norm2d_0.w_0", 
+            "persistable": true, 
+            "shape": [
+                512
+            ]
+        }, 
+        "batch_norm2d_0.w_1": {
+            "name": "batch_norm2d_0.w_1", 
+            "persistable": true, 
+            "shape": [
+                512
+            ]
+        }, 
+        "batch_norm2d_0.w_2": {
+            "name": "batch_norm2d_0.w_2", 
+            "persistable": true, 
+            "shape": [
+                512
+            ]
+        }, 
+        "batch_norm2d_1.b_0": {
+            "name": "batch_norm2d_1.b_0", 
+            "persistable": true, 
+            "shape": [
+                256
+            ]
+        }, 
+        "batch_norm2d_1.w_0": {
+            "name": "batch_norm2d_1.w_0", 
+            "persistable": true, 
+            "shape": [
+                256
+            ]
+        }, 
+        "batch_norm2d_1.w_1": {
+            "name": "batch_norm2d_1.w_1", 
+            "persistable": true, 
+            "shape": [
+                256
+            ]
+        }, 
+        "batch_norm2d_1.w_2": {
+            "name": "batch_norm2d_1.w_2", 
+            "persistable": true, 
+            "shape": [
+                256
+            ]
+        }, 
+        "batch_norm2d_2.b_0": {
+            "name": "batch_norm2d_2.b_0", 
+            "persistable": true, 
+            "shape": [
+                128
+            ]
+        }, 
+        "batch_norm2d_2.w_0": {
+            "name": "batch_norm2d_2.w_0", 
+            "persistable": true, 
+            "shape": [
+                128
+            ]
+        }, 
+        "batch_norm2d_2.w_1": {
+            "name": "batch_norm2d_2.w_1", 
+            "persistable": true, 
+            "shape": [
+                128
+            ]
+        }, 
+        "batch_norm2d_2.w_2": {
+            "name": "batch_norm2d_2.w_2", 
+            "persistable": true, 
+            "shape": [
+                128
+            ]
+        }, 
+        "batch_norm2d_3.b_0": {
+            "name": "batch_norm2d_3.b_0", 
+            "persistable": true, 
+            "shape": [
+                64
+            ]
+        }, 
+        "batch_norm2d_3.w_0": {
+            "name": "batch_norm2d_3.w_0", 
+            "persistable": true, 
+            "shape": [
+                64
+            ]
+        }, 
+        "batch_norm2d_3.w_1": {
+            "name": "batch_norm2d_3.w_1", 
+            "persistable": true, 
+            "shape": [
+                64
+            ]
+        }, 
+        "batch_norm2d_3.w_2": {
+            "name": "batch_norm2d_3.w_2", 
+            "persistable": true, 
+            "shape": [
+                64
+            ]
+        }, 
+        "batch_norm_0.tmp_0": {
+            "name": "batch_norm_0.tmp_0", 
+            "persistable": false, 
+            "shape": [
+                0
+            ]
+        }, 
+        "batch_norm_0.tmp_1": {
+            "name": "batch_norm_0.tmp_1", 
+            "persistable": false, 
+            "shape": [
+                0
+            ]
+        }, 
+        "batch_norm_0.tmp_2": {
+            "name": "batch_norm_0.tmp_2", 
+            "persistable": false, 
+            "shape": [
+                512, 
+                512, 
+                7, 
+                7
+            ]
+        }, 
+        "batch_norm_0.tmp_3": {
+            "name": "batch_norm_0.tmp_3", 
+            "persistable": false, 
+            "shape": [
+                0
+            ]
+        }, 
+        "batch_norm_1.tmp_0": {
+            "name": "batch_norm_1.tmp_0", 
+            "persistable": false, 
+            "shape": [
+                0
+            ]
+        }, 
+        "batch_norm_1.tmp_1": {
+            "name": "batch_norm_1.tmp_1", 
+            "persistable": false, 
+            "shape": [
+                0
+            ]
+        }, 
+        "batch_norm_1.tmp_2": {
+            "name": "batch_norm_1.tmp_2", 
+            "persistable": false, 
+            "shape": [
+                512, 
+                256, 
+                14, 
+                14
+            ]
+        }, 
+        "batch_norm_1.tmp_3": {
+            "name": "batch_norm_1.tmp_3", 
+            "persistable": false, 
+            "shape": [
+                0
+            ]
+        }, 
+        "batch_norm_2.tmp_0": {
+            "name": "batch_norm_2.tmp_0", 
+            "persistable": false, 
+            "shape": [
+                0
+            ]
+        }, 
+        "batch_norm_2.tmp_1": {
+            "name": "batch_norm_2.tmp_1", 
+            "persistable": false, 
+            "shape": [
+                0
+            ]
+        }, 
+        "batch_norm_2.tmp_2": {
+            "name": "batch_norm_2.tmp_2", 
+            "persistable": false, 
+            "shape": [
+                512, 
+                128, 
+                28, 
+                28
+            ]
+        }, 
+        "batch_norm_2.tmp_3": {
+            "name": "batch_norm_2.tmp_3", 
+            "persistable": false, 
+            "shape": [
+                0
+            ]
+        }, 
+        "batch_norm_3.tmp_0": {
+            "name": "batch_norm_3.tmp_0", 
+            "persistable": false, 
+            "shape": [
+                0
+            ]
+        }, 
+        "batch_norm_3.tmp_1": {
+            "name": "batch_norm_3.tmp_1", 
+            "persistable": false, 
+            "shape": [
+                0
+            ]
+        }, 
+        "batch_norm_3.tmp_2": {
+            "name": "batch_norm_3.tmp_2", 
+            "persistable": false, 
+            "shape": [
+                512, 
+                64, 
+                56, 
+                56
+            ]
+        }, 
+        "batch_norm_3.tmp_3": {
+            "name": "batch_norm_3.tmp_3", 
+            "persistable": false, 
+            "shape": [
+                0
+            ]
+        }, 
+        "conv2d_transpose_0.w_0": {
+            "name": "conv2d_transpose_0.w_0", 
+            "persistable": true, 
+            "shape": [
+                100, 
+                512, 
+                4, 
+                4
+            ]
+        }, 
+        "conv2d_transpose_1.w_0": {
+            "name": "conv2d_transpose_1.w_0", 
+            "persistable": true, 
+            "shape": [
+                512, 
+                256, 
+                4, 
+                4
+            ]
+        }, 
+        "conv2d_transpose_2.w_0": {
+            "name": "conv2d_transpose_2.w_0", 
+            "persistable": true, 
+            "shape": [
+                256, 
+                128, 
+                4, 
+                4
+            ]
+        }, 
+        "conv2d_transpose_3.w_0": {
+            "name": "conv2d_transpose_3.w_0", 
+            "persistable": true, 
+            "shape": [
+                128, 
+                64, 
+                4, 
+                4
+            ]
+        }, 
+        "conv2d_transpose_4.w_0": {
+            "name": "conv2d_transpose_4.w_0", 
+            "persistable": true, 
+            "shape": [
+                64, 
+                1, 
+                4, 
+                4
+            ]
+        }, 
+        "conv2d_transpose_5.tmp_0": {
+            "name": "conv2d_transpose_5.tmp_0", 
+            "persistable": false, 
+            "shape": [
+                512, 
+                512, 
+                7, 
+                7
+            ]
+        }, 
+        "conv2d_transpose_6.tmp_0": {
+            "name": "conv2d_transpose_6.tmp_0", 
+            "persistable": false, 
+            "shape": [
+                512, 
+                256, 
+                14, 
+                14
+            ]
+        }, 
+        "conv2d_transpose_7.tmp_0": {
+            "name": "conv2d_transpose_7.tmp_0", 
+            "persistable": false, 
+            "shape": [
+                512, 
+                128, 
+                28, 
+                28
+            ]
+        }, 
+        "conv2d_transpose_8.tmp_0": {
+            "name": "conv2d_transpose_8.tmp_0", 
+            "persistable": false, 
+            "shape": [
+                512, 
+                64, 
+                56, 
+                56
+            ]
+        }, 
+        "conv2d_transpose_9.tmp_0": {
+            "name": "conv2d_transpose_9.tmp_0", 
+            "persistable": false, 
+            "shape": [
+                512, 
+                1, 
+                112, 
+                112
+            ]
+        }, 
+        "relu_0.tmp_0": {
+            "name": "relu_0.tmp_0", 
+            "persistable": false, 
+            "shape": [
+                512, 
+                512, 
+                7, 
+                7
+            ]
+        }, 
+        "relu_1.tmp_0": {
+            "name": "relu_1.tmp_0", 
+            "persistable": false, 
+            "shape": [
+                512, 
+                256, 
+                14, 
+                14
+            ]
+        }, 
+        "relu_2.tmp_0": {
+            "name": "relu_2.tmp_0", 
+            "persistable": false, 
+            "shape": [
+                512, 
+                128, 
+                28, 
+                28
+            ]
+        }, 
+        "relu_3.tmp_0": {
+            "name": "relu_3.tmp_0", 
+            "persistable": false, 
+            "shape": [
+                512, 
+                64, 
+                56, 
+                56
+            ]
+        }, 
+        "tanh_1.tmp_0": {
+            "name": "tanh_1.tmp_0", 
+            "persistable": false, 
+            "shape": [
+                512, 
+                1, 
+                112, 
+                112
+            ]
+        }, 
+        "x": {
+            "name": "x", 
+            "persistable": false, 
+            "shape": [
+                512, 
+                100, 
+                4, 
+                4
+            ]
+        }
+    }
+}
